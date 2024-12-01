@@ -2,7 +2,7 @@
 北航（BUAA）课程报告`Latex模版`（改编自XDUreport:西安电子科技大学实验报告 LaTeX 模板），在课程没有明确报告模版要求时可使用本模版，无痛编译，一键使用
 1. 请直接git/download，文件结构为
    ```
-     - BUAA_Report
+     - BUAA-report-latex-main
          - 【请先安装字体，否则报错】Fonts
          - cover （存放北航logo和buaaname）
          - img（存在文档图片）
