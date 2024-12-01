@@ -152,7 +152,8 @@
 \newcommand{\pagechead}{学号+姓名} % 默认完成时间
 % 页眉页脚设置
 \lhead{\small \textsf{\@problem}}
-\chead{\small \textsf{\pagechead}} % 此处填写页眉中个人信息
+% \chead{\small \textsf{\pagechead}} % 此处填写页眉中个人信息
+\chead{\small \textsf{\hspace{0.2\textwidth} \pagechead}}  % 强制chead后移
 \rhead{\small Page \thepage\ of \pageref{LastPage}}
 \lfoot{}
 \cfoot{}
