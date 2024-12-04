@@ -12,14 +12,14 @@
 
 ```
 BUAA-report-latex
-	[文件夹]【请先安装字体，否则报错】Fonts          # 存放字体
+	[文件夹]【请先安装字体，否则报错】Fonts      # 存放字体
 	[文件夹] cover                              # 存放校徽校名
 	[文件夹] img                                # 存放正文图片
-	BUAAreport.sty                             # sty配置文件
-	BUAAreport-Demo.pdf						   # 模版最终效果展示pdf
-	BUAAreport-Demo.tex						   # tex主文件，编译运行生成pdf
+	BUAAreport.sty                              # sty配置文件
+	BUAAreport-Demo.pdf			    # 模版最终效果展示pdf
+	BUAAreport-Demo.tex			    # tex主文件，编译运行生成pdf
 	README.md                                 
-	texput.log                                 # LaTeX 编译过程中生成的日志文件
+	texput.log                                  # LaTeX 编译过程中生成的日志文件
 ```
 
 - 本模版在本地 `Windows` 环境成功运行，目前暂无overleaf版本（可自行cv） ，本地采用编辑器 `TeXstudio 4.6.3` ，编译方式为 `xelatex`，编码方式为 `UTF-8`
