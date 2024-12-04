@@ -141,10 +141,6 @@
 \renewcommand{\figurename}{Figure}
 \renewcommand{\tablename}{Table}
 
-% 按章节编号来编号图表
-\renewcommand{\thefigure}{\thesection.\arabic{figure}}  % 图表编号格式为 章节.图
-\renewcommand{\thetable}{\thesection.\arabic{table}}    % 表格编号格式为 章节.表
-
 \setlength{\belowcaptionskip}{4pt}
 \setlength{\abovecaptionskip}{4pt}  % 设置 caption 与上下文间距
 
@@ -231,8 +227,8 @@ frameround = tttt,
 
 % 封面默认参数
 \newcommand{\studentid}{2400000000} % 默认学号
-\newcommand{\studentname}{2400000000} % 默认姓名
-\newcommand{\teachername}{2400000000} % 默认指导老师姓名
+\newcommand{\studentname}{张大三} % 默认姓名
+\newcommand{\teachername}{李小四} % 默认指导老师姓名
 \newcommand{\overdate}{\today} % 默认完成时间
 % 封面 生成
 \def\@maketitle{
@@ -283,6 +279,12 @@ frameround = tttt,
     \clearpage
     \pagestyle{fancy}
     \setlength\parskip{1ex}}  % 调整段间距
+
+%% 如果想要按照默认自增顺序编号图表，请注释如下信息
+% 按章节编号来编号图表
+\renewcommand{\thefigure}{\thesection.\arabic{figure}}  % 图表编号格式为 章节.图
+\renewcommand{\thetable}{\thesection.\arabic{table}}    % 表格编号格式为 章节.表
+
 % 图表编号，在每一章节开始时重置为1
 \makeatletter
 \@addtoreset{figure}{section}  % 每次新小节开始时，图表编号从 1 开始
@@ -293,4 +295,5 @@ frameround = tttt,
 \setcounter{table}{0}  % 重置 table 编号
 
 \makeatother
+%% 如果想要按照默认自增顺序编号图表，请注释如上信息
 \endinput
