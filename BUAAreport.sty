@@ -1,0 +1,296 @@
+%% 本BUAA课程报告模板是根据 西电课程报告模版：XDUreport.sty稍微改动而来，仅自用于BUAA课程报告，在封面部分稍作改动
+%% 在cover文件夹中更换logo.pdf和buaa.pdf，修改该文件中此两处地方即可设置其他学校信息
+
+%% 原作者推荐：
+%% EasyMCM: 一个简洁、易用的美赛模板
+%% Oringinal template (MCMthesis v5.0) by latexstudio, <latexstudio@hotmail.com>
+%% Redeveloped by youjiarui189 (xjtu-blacksmith), <yjr134@163.com>
+%% 目前由西安交大钱院学辅（@qyxf）负责，网址：https://qyxf.site/
+%%
+%% v5.00: 注释全部汉化（且添加了大量注释），并将格式改进为符合当前规范的版本
+%% v5.01: 正式改为独立宏包 EasyMCM，改为简洁、清晰、符合美赛规范的格式
+%% v5.02: 支持了 7 位控制号，改进了若干已知问题，并补充了一些非必需的内容
+%% v5.1 : 适配 2020 年 Summary sheet 样式，大幅优化代码，更加简明易用
+%% 
+%% 博客地址：http://www.cnblogs.com/xjtu-blacksmith/
+%% GitHub 发布页面：https://github.com/qyxf/easymcm/releases
+%% 再次强调：原作为XDUreport，仅以个人习惯做稍微改动，自用！
+
+
+\NeedsTeXFormat{LaTeX2e}[2005/12/01]
+\ProvidesPackage{BUAAreport}[2024/11/28 EasyMCM v5.1]   
+\typeout{EasyMCM Package, version 5.1}
+
+% 基本宏包 
+\RequirePackage[a4paper,margin=2.5cm,bottom=1.5cm]{geometry}  % 页边距和纸张大小
+\RequirePackage{fancyhdr,fancybox}  % 设置页眉页脚
+\RequirePackage{ifthen}  % 逻辑结构
+\RequirePackage{lastpage}  % 生成"Page X of XX"
+\RequirePackage{paralist}  % 修改 itemize 各项间距
+\RequirePackage{indentfirst}  % 全文首行缩进
+\RequirePackage[toc,page,title,titletoc,header]{appendix}  % 附录定制
+\RequirePackage{pdfpages}
+\RequirePackage{listings}
+\RequirePackage{lscape}
+
+
+
+% 数学公式
+\RequirePackage{amsfonts,amsmath,amssymb} % AMS-LaTeX 符号、公式
+
+% 定理环境声明
+% 事实上大部分论文中用不到，但仍保留以供使用
+\newtheorem{Theorem}{Theorem}[section]
+\newtheorem{Lemma}[Theorem]{Lemma}
+\newtheorem{Corollary}[Theorem]{Corollary}
+\newtheorem{Proposition}[Theorem]{Proposition}
+\newtheorem{Definition}[Theorem]{Definition}
+\newtheorem{Example}[Theorem]{Example}
+
+% 目录
+\RequirePackage{titlesec,titletoc}  % 自定义目录样式
+\setcounter{tocdepth}{3}  % 目录显示到 subsubsection(3) 级别
+\RequirePackage[font=small]{caption}  % 使图表标题字号小一号
+\renewcommand\abstractname{Summary}  % 摘要标题
+
+% 表格相关
+\RequirePackage{longtable,multirow,array}  % 各种基本的表格宏包
+\RequirePackage{booktabs}  % 三线表宏包
+\RequirePackage{tabularx}
+\RequirePackage{longtable}
+\RequirePackage{tabu}
+\RequirePackage{threeparttable}
+
+% 字体相关
+\RequirePackage[T1]{fontenc}  % 开启拓展区正文字体
+\RequirePackage{url}  % 网址宏包，以下命令使得网址能自动换行
+\def\UrlBreaks{\do\A\do\B\do\C\do\D\do\E\do\F\do\G\do\H\do\I\do\J
+\do\K\do\L\do\M\do\N\do\O\do\P\do\Q\do\R\do\S\do\T\do\U\do\V
+\do\W\do\X\do\Y\do\Z\do\[\do\\\do\]\do\^\do\_\do\`\do\a\do\b
+\do\c\do\d\do\e\do\f\do\g\do\h\do\i\do\j\do\k\do\l\do\m\do\n
+\do\o\do\p\do\q\do\r\do\s\do\t\do\u\do\v\do\w\do\x\do\y\do\z
+\do\.\do\@\do\\\do\/\do\!\do\_\do\|\do\;\do\>\do\]\do\)\do\,
+\do\?\do\'\do+\do\=\do\#}
+
+% 基本参数
+\setlength{\headheight}{15pt}
+\newcommand{\SubjectName}{实验名称}  % 科目名称
+\DeclareOption*{\edef\SubjectName{\CurrentOption}}  % 宏包选项接收控制号
+\ProcessOptions
+\newcommand{\@problem}[1]{}
+\newcommand{\problem}[1]{\gdef\@problem{#1}}
+\newcommand{\@tutor}[1]{}
+\newcommand{\tutor}[1]{\gdef\@tutor{#1}}
+\newcommand{\@labdate}[1]{}
+\newcommand{\labdate}[1]{\gdef\@labdate{#1}}
+
+% 书签，插图和交叉引用的设置
+\RequirePackage{graphicx}  % 插图
+\RequirePackage{flafter}  % 引用该宏包可避免图片在引用它的正文之前出现
+\RequirePackage{float} 
+\RequirePackage{subcaption}
+\RequirePackage{ifpdf}  % 判断是否在运行 pdftex
+\ifpdf%
+\RequirePackage{epstopdf}  % pdftex 不能使用 eps 图片，用该宏包转成 pdf 后使用
+\DeclareGraphicsExtensions{.pdf,.jpg,.jpeg,.png}    % 允许的图片类型
+\RequirePackage[
+    linkcolor=black,  % 消除链接色彩
+    citecolor=black,
+    colorlinks=true,
+    linkcolor=black,
+    citecolor=black,
+    urlcolor=black]{hyperref}
+\else\DeclareGraphicsExtensions{.eps,.ps}  % 不需要转换 eps 图片格式
+\ifxetex\RequirePackage[
+    xetex,  % 运行 xetex
+    pdfstartview=FitH,
+    bookmarksnumbered=true,
+    bookmarksopen=true,
+    colorlinks=true,
+    linkcolor=black,
+    citecolor=black,
+    urlcolor=black]{hyperref}
+\else\RequirePackage[
+    dvipdfm,  % 运行其他编译引擎（如 luatex）
+    pdfstartview=FitH,
+    bookmarksnumbered=true,
+    bookmarksopen=true,
+    colorlinks=true,
+    linkcolor=black,
+    citecolor=black,
+    urlcolor=black]{hyperref}
+\fi\fi
+
+% 以下设置使得一页上最多有六个浮动对象（图、表）
+% 且顶部最多三个，底部最多三个
+% 可自行修改参数
+\setcounter{totalnumber}{6}
+\setcounter{topnumber}{3}
+\setcounter{bottomnumber}{3}
+
+% 很多人发现缺省的浮动参数过于严格了
+% 下面的命令
+\renewcommand{\textfraction}{0.15}
+\renewcommand{\topfraction}{0.85}
+\renewcommand{\bottomfraction}{0.65}
+\renewcommand{\floatpagefraction}{0.60}
+% 将浮动参数重新设置为更宽松的值。
+% ---选自《LaTeX2e插图指南》
+
+% 图表标题名称
+\renewcommand{\figurename}{Figure}
+\renewcommand{\tablename}{Table}
+
+% 按章节编号来编号图表
+\renewcommand{\thefigure}{\thesection.\arabic{figure}}  % 图表编号格式为 章节.图
+\renewcommand{\thetable}{\thesection.\arabic{table}}    % 表格编号格式为 章节.表
+
+\setlength{\belowcaptionskip}{4pt}
+\setlength{\abovecaptionskip}{4pt}  % 设置 caption 与上下文间距
+
+% 以下定义了自动识别的图表文件夹
+% 若使用这些名字命名文件夹
+% 则引用图片路径时只需填文件名即可
+\graphicspath{{./}{./img/}{./fig/}{./image/}{./figure/}{./picture/}{./cover}}
+
+% 默认页眉信息
+\newcommand{\pagechead}{学号+姓名} % 默认完成时间
+% 页眉页脚设置
+\lhead{\small \textsf{\@problem}}
+\chead{\small \textsf{\pagechead}} % 此处填写页眉中个人信息
+%\chead{\small \textsf{\pagechead}} % 此处填写页眉中个人信息
+\chead{\small \textsf{\hspace{0.2\textwidth} \pagechead}}  % 强制chead后移
+\rhead{\small Page \thepage\ of \pageref{LastPage}}
+\lfoot{}
+\cfoot{}
+\rfoot{}
+
+% 信件/备忘录环境
+\newcounter{prefix}  % 创建隐藏前缀计数器，避免对 letter 环境编号
+\renewcommand{\theHsection}{\theprefix.\thesection}  % 针对 hyperref
+\newenvironment{letter}[1]{\refstepcounter{section}\addtocounter{section}{-1}\section*{#1}\addcontentsline{toc}{section}{#1}}{\stepcounter{prefix}}
+
+% 参考文献
+\newcommand{\upcite}[1]{\textsuperscript{\textsuperscript{\cite{#1}}}}
+
+%  etoolbox
+\RequirePackage{etoolbox}  % 减轻正文复杂度
+\AtBeginEnvironment{abstract}{\setlength\parskip{1ex}}  % 摘要中增加段距
+\AtBeginEnvironment{thebibliography}{
+    \refstepcounter{section}
+    \addcontentsline{toc}{section}{References}}  % 参考文献附加链接
+\BeforeBeginEnvironment{subappendices}{
+    \clearpage
+    \setcounter{secnumdepth}{-1}}  % 附录附加链接
+\BeforeBeginEnvironment{letter}{\clearpage}  % 信件环境附加换页
+
+% 代码相关
+\RequirePackage{listings}
+\RequirePackage{color,xcolor}
+\definecolor{grey}{rgb}{0.8,0.8,0.8}
+\definecolor{darkgreen}{rgb}{0,0.3,0}
+\definecolor{darkblue}{rgb}{0,0,0.3}
+\def\lstbasicfont{\ttfamily\selectfont\footnotesize}
+\lstset{%
+frame=trbl,
+frameround = tttt,
+   numbers=left,
+   numberstyle=\tiny\sffamily,%
+    showstringspaces=false,
+    showspaces=false,%
+    tabsize=4,%
+    breaklines=true,%
+    % frame=lines,%
+    basicstyle={\footnotesize\lstbasicfont},%
+    keywordstyle=\color{blue},%
+    identifierstyle=,%
+    commentstyle=\itshape\color{teal},%\itshape,%
+    stringstyle=\color{violet},%
+    escapeinside=``,%
+    backgroundcolor=\color[RGB]{245,245,244},
+    framerule=1pt,
+    rulecolor=\color{gray!35},
+    backgroundcolor=\color{gray!5},
+}
+\lstloadlanguages{C,C++,Java,Matlab,Mathematica,vhdl,python}
+
+
+
+
+% 中文格式
+\RequirePackage{xeCJK}
+\RequirePackage{ctex}
+%\setCJKmainfont[BoldFont={方正小标宋_GBK},ItalicFont={KaiTi}]{SimSun}
+%\setCJKsansfont[BoldFont={.PingFang SC Medium},ItalicFont={方正北魏楷书简体}]{.PingFang SC Regular}
+%\setCJKmonofont[ItalicFont={FangSong}]{FangSong}
+
+% 各级标题
+% \RequirePackage{titlesec}
+% \titleformat{\section}{\raggedleft\Large\bfseries\rmfamily}{\thesection、}{1em}{}
+% \titleformat{command}[shape]{format}{label}{sep}{before}[after]
+
+% 封面默认参数
+\newcommand{\studentid}{2400000000} % 默认学号
+\newcommand{\studentname}{2400000000} % 默认姓名
+\newcommand{\teachername}{2400000000} % 默认指导老师姓名
+\newcommand{\overdate}{\today} % 默认完成时间
+% 封面 生成
+\def\@maketitle{
+    \centering
+	\includegraphics[width=0.7\textwidth]{buaa.pdf}\par
+	% \vspace{0.1cm}
+	% {\scshape\LARGE Beihang University \par}
+	\vspace{1cm}
+    {\fontsize{30pt}{1.2} \textbf{《\SubjectName 》}\par}
+    \vspace{1cm}
+    {\fontsize{40pt}{1.2} \textbf{\textsf{课~程~报~告}}\par}
+    \vfill
+    \includegraphics[width=0.4\textwidth]{logo.pdf}\par
+	\vspace{0.5cm}
+    \begin{center}
+        \makebox[28mm][s]{\Large\textsf{题目}}~\underline{\parbox[t]{132mm}{\centering\Large\fangsong{\textsf{\@problem}}}}\\
+        \vskip1cm 
+        \makebox[28mm][s]{\Large\textsf{指导教师}}~\underline{\makebox[132mm][c]{\Large \fangsong{\textsf{\teachername}}}}\\
+        \vskip1cm 
+       % 需要学院、专业、学号、班级可以取消这个注释，注释下面的学号box
+       % \makebox[28mm][s]{\Large\textsf{学院}}~\underline{\makebox[60mm][c]{\Large \fangsong{xxxx学院}}}\makebox[28mm][s]{\Large\textsf{专业}}~\underline{\makebox[51mm][c]{\Large \fangsong{xxxx}}}\\
+       % \vskip1cm 
+       % \makebox[28mm][s]{\Large\textsf{学号}}~\underline{\makebox[60mm][c]{\Large xxxx}}\makebox[28mm][s]{\Large\textsf{班级}}~\underline{\makebox[51mm][c]{\Large xxxx}}\\
+       % \vskip1cm 
+        \makebox[28mm][s]{\Large\textsf{学号}}~\underline{\makebox[132mm][c]{\Large \textbf{\studentid}}}\\
+        \vskip1cm 
+        \makebox[28mm][s]{\Large\textsf{姓名}}~\underline{\makebox[132mm][c]{\Large \textbf{\studentname}}}\\
+        \vskip1cm 
+        \makebox[28mm][s]{\Large\textsf{完成时间}}~\underline{\makebox[132mm][c]{\Large \fangsong{\overdate}}}\\ % 可以手动填写xxxx年xx月xx日，也可以直接\today
+        \vskip1cm 
+    \end{center}
+% Bottom of the page
+    \vfill
+    \pagenumbering{gobble}
+    \pagestyle{empty}
+    \newpage
+    \pagenumbering{arabic}
+    \setcounter{page}{0}}%1
+
+% 目录生成
+\renewcommand\tableofcontents{%
+    \centerline{\normalfont\Large\bfseries\contentsname%
+    \@mkboth{%
+    \MakeUppercase\contentsname}{\MakeUppercase\contentsname}}%
+    \vskip 3ex%
+    \@starttoc{toc}%
+    \thispagestyle{empty}
+    \clearpage
+    \pagestyle{fancy}
+    \setlength\parskip{1ex}}  % 调整段间距
+% 图表编号，在每一章节开始时重置为1
+\makeatletter
+\@addtoreset{figure}{section}  % 每次新小节开始时，图表编号从 1 开始
+\@addtoreset{table}{section}   % 每次新小节开始时，表格编号从 1 开始
+
+% 确保 figure 和 table 编号从 1 开始
+\setcounter{figure}{0} % 重置 figure 编号
+\setcounter{table}{0}  % 重置 table 编号
+
+\makeatother
+\endinput
