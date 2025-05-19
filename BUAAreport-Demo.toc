@@ -1,0 +1,22 @@
+\contentsline {section}{\numberline {1}选题目的}{1}{section.0.1}%
+\contentsline {section}{\numberline {2}设计目标}{1}{section.0.2}%
+\contentsline {section}{\numberline {3}实现方案}{2}{section.0.3}%
+\contentsline {subsection}{\numberline {3.1}仿真环境}{2}{subsection.0.3.1}%
+\contentsline {subsection}{\numberline {3.2}总体工作原理}{2}{subsection.0.3.2}%
+\contentsline {subsection}{\numberline {3.3}分模块原理框图}{4}{subsection.0.3.3}%
+\contentsline {section}{\numberline {4}设计过程与仿真结果}{4}{section.0.4}%
+\contentsline {subsection}{\numberline {4.1}\texttt {COUNT\_TIME}模块实现过程}{4}{subsection.0.4.1}%
+\contentsline {subsubsection}{\numberline {4.1.1}\texttt {COUNT\_TIME}模块设计流程}{4}{subsubsection.0.4.1.1}%
+\contentsline {subsubsection}{\numberline {4.1.2}\texttt {COUNT\_TIME}模块仿真结果}{7}{subsubsection.0.4.1.2}%
+\contentsline {subsection}{\numberline {4.2}其余模块实现过程}{7}{subsection.0.4.2}%
+\contentsline {subsubsection}{\numberline {4.2.1}\texttt {DISPLAY}模块实现过程}{7}{subsubsection.0.4.2.1}%
+\contentsline {section}{\numberline {5}遇到问题及解决方法}{8}{section.0.5}%
+\contentsline {section}{\numberline {6}实现结果}{8}{section.0.6}%
+\contentsline {subsection}{\numberline {6.1}DE0实验板的管脚分配}{8}{subsection.0.6.1}%
+\contentsline {subsection}{\numberline {6.2}上板调试}{9}{subsection.0.6.2}%
+\contentsline {subsection}{\numberline {6.3}实现功能说明}{9}{subsection.0.6.3}%
+\contentsline {section}{\numberline {7}对该课程的实施意见及建议}{9}{section.0.7}%
+\contentsline {section}{References}{9}{section.0.8}%
+\contentsline {section}{Appendices}{10}{section*.7}%
+\contentsline {section}{附录 \numberline {A}核心层}{10}{appendix.1.A}%
+\contentsfinish 

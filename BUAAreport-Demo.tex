@@ -7,11 +7,15 @@
 \labdate{\today} % 实验日期
 %  如要采用学院、专业、学号、班级格式请在sty宏包更改，去掉注释即可
 %  以下是学院，姓名，学号设置
-\renewcommand{\studentid}{1234567890} % 用实际学号替换这里的数字
-\renewcommand{\studentname}{张~大~三} % 实际姓名替换汉字
 \renewcommand{\teachername}{李~小~四} % 实际指导老师姓名
 \renewcommand{\overdate}{\today} % 默认完成时间为today，可手动修改，如：2024年11月28日
 \renewcommand{\pagechead}{学号＋姓名} % 页眉的学号和姓名
+% 单人作业
+\renewcommand{\studentid}{1234567890} % 用实际学号替换这里的数字
+\renewcommand{\studentname}{张~大~三} % 实际姓名替换汉字
+% 小组作业，取消注释下面，修改.sty文件中的小组作业部分
+%\newcommand{\groupmembers}{张大三, 李小四, 王五}  % 示例姓名
+%\newcommand{\groupids}{2400000000, 2400000001, 2400000002}  % 对应的学号
 
 % ！标题超过两行时，取消下面的三行注释，确保页眉仅有标题从而正常显示
 %\chead{} 
