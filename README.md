@@ -10,6 +10,7 @@
 
    - git clone/download下来以后，文件目录如下所示：
 
+<<<<<<< HEAD
    ```
    BUAA-report-latex
    	[文件夹]【请先安装字体，否则报错】Fonts      # 存放字体
@@ -21,6 +22,19 @@
    	README.md                                 
    	texput.log                                  # LaTeX 编译过程中生成的日志文件
    ```
+=======
+```
+BUAA-report-latex
+	[文件夹]【请先安装字体，否则报错】Fonts      # 存放字体
+	[文件夹] cover                              # 存放校徽校名
+	[文件夹] img                                # 存放正文图片
+	BUAAreport.sty                              # sty配置文件
+	BUAAreport-Demo.pdf			    # 模版最终效果展示pdf
+	BUAAreport-Demo.tex			    # tex主文件，编译运行生成pdf
+	README.md                                 
+	texput.log                                  # LaTeX 编译过程中生成的日志文件
+```
+>>>>>>> c830817b69e01a9cbe307a3dc9c19d76272ab4b2
 
    - 本模版在本地 `Windows` 环境成功运行，目前暂无overleaf版本（可自行cv） ，本地采用编辑器 `TeXstudio 4.6.3` ，编译方式为 `xelatex`，编码方式为 `UTF-8`
    - 运行环境配置完成后，打开`BUAAreport-Demo.tex`文件，可以一键编译运行查看效果。在正式编写个人报告时请**认真按照tex文件开头的若干注释**修改为自己的信息，同时请仔细阅读注释中的注意事项
@@ -32,8 +46,18 @@
 
    ##  如何贡献
 
+<<<<<<< HEAD
    1. Fork 这个仓库。 
    2.  创建一个新的分支 (`git checkout -b feature-branch`)。 
    3. 提交你修改的内容 (`git commit -am 'Add new feature'`)。 
    4. 推送到你的分支 (`git push origin feature-branch`)。 
    5. 创建一个 pull request，描述你的更改，如果发现任何问题或有改进建议，欢迎通过 issue 提交反馈。
+=======
+##  如何贡献
+
+1. Fork 这个仓库。 
+2.  创建一个新的分支 (`git checkout -b feature-branch`)。 
+3. 提交你修改的内容 (`git commit -am 'Add new feature'`)。 
+4. 推送到你的分支 (`git push origin feature-branch`)。 
+5. 创建一个 pull request，描述你的更改，如果发现任何问题或有改进建议，欢迎通过 issue 提交反馈。
+>>>>>>> c830817b69e01a9cbe307a3dc9c19d76272ab4b2
